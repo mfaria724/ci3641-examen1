@@ -7,5 +7,5 @@ def zipWith(a, b, func):
       yield p
 
 # execution example
-for p in zipWith([0,1,2,1], [1,2,1,0], lambda x, y: x + y):
-  print(p)
+# for p in zipWith([0,1,2,1], [1,2,1,0], lambda x, y: x + y):
+#   print(p)
