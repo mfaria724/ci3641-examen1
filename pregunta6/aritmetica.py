@@ -5,7 +5,6 @@ def pre_order(tokens):
   operations = []
   operands = []
 
-  first_node = None
   previous_node = None
 
   for token in tokens:
@@ -21,21 +20,19 @@ def pre_order(tokens):
         print(f"El token {token} es invalido")
         sys.exit()
 
+      # if there's enough operands, evaluate the opration
       if len(operands) == 2:
         operator = operations.pop()
         op2 = operands.pop()
         op1 = operands.pop()
 
+        # different treatment if it is a leaf or a node
         if not previous_node:
           node = OpNode(operator, op1, op2)
         else:
           node = OpNode(operator, previous_node, op2)
 
         previous_node = node
-
-        if not first_node:
-          first_node = node
-
         result = eval(op1 + operator + op2)
         operands.append(str(result))
   
@@ -68,6 +65,9 @@ def post_order(tokens):
   return operands[0]
 
 def eval_expr(args):
+  """
+  Evaluates an expression in pre or post order.
+  """
 
   order = args[1]
   if not order in ['PRE', 'POST']:
@@ -91,11 +91,16 @@ def eval_expr(args):
   return node
 
 def show_infix(option):
+  """
+  Shows the expression in infix order
+  """
 
   node = eval_expr(option)
 
   if node:
     print(node)
+  else:
+    print('Ha ocurrido un error')
   
 
 def parse_options(option):
